@@ -27,8 +27,18 @@
  *  21 => 'Fizz'
  *
  */
-function getFizzBuzz(/* num */) {
-  throw new Error('Not implemented');
+function getFizzBuzz(num) {
+  let result;
+  if (num % 3 === 0 && num % 5 === 0) {
+    result = 'FizzBuzz';
+  } else if (num % 3 === 0) {
+    result = 'Fizz';
+  } else if (num % 5 === 0) {
+    result = 'Buzz';
+  } else {
+    result = num;
+  }
+  return result;
 }
 
 
@@ -43,8 +53,14 @@ function getFizzBuzz(/* num */) {
  *   5  => 120
  *   10 => 3628800
  */
-function getFactorial(/* n */) {
-  throw new Error('Not implemented');
+function getFactorial(n) {
+  let num = n;
+  let result = 1;
+  while (num > 0) {
+    result *= num;
+    num -= 1;
+  }
+  return result;
 }
 
 
@@ -60,8 +76,14 @@ function getFactorial(/* n */) {
  *   5,10  =>  45 ( = 5+6+7+8+9+10 )
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
-function getSumBetweenNumbers(/* n1, n2 */) {
-  throw new Error('Not implemented');
+function getSumBetweenNumbers(n1, n2) {
+  let result = 0;
+  let start = n1;
+  while (start <= n2) {
+    result += start;
+    start += 1;
+  }
+  return result;
 }
 
 
@@ -269,6 +291,16 @@ function isCreditCardNumber(/* ccn */) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(/* num */) {
+  /* let result = 0;
+  const arrNum = `${num}`.split('');
+  arrNum.forEach((item) => {
+    result += item * 1;
+  });
+  if (`${result}`.length > 1) {
+    getDigitalRoot(result);
+  } else {
+    return result;
+  } */
   throw new Error('Not implemented');
 }
 
@@ -319,8 +351,8 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 
