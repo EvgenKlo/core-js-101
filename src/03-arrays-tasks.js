@@ -91,13 +91,7 @@ function doubleArray(arr) {
  *    [] => []
  */
 function getArrayOfPositives(arr) {
-  const newArr = [];
-  arr.forEach((item) => {
-    if (item > 0) {
-      newArr.push(item);
-    }
-  });
-  return newArr;
+  return arr.filter((item) => item > 0);
 }
 
 /**
@@ -112,13 +106,7 @@ function getArrayOfPositives(arr) {
  *    [ 'cat, 'dog', 'raccoon' ] => [ 'cat', 'dog', 'raccoon' ]
  */
 function getArrayOfStrings(arr) {
-  const result = [];
-  arr.forEach((item) => {
-    if (typeof item === 'string') {
-      result.push(item);
-    }
-  });
-  return result;
+  return arr.filter((item) => typeof item === 'string');
 }
 
 /**
@@ -135,13 +123,7 @@ function getArrayOfStrings(arr) {
  *    [ false, 0, NaN, '', undefined ]   => [ ]
  */
 function removeFalsyValues(arr) {
-  const result = [];
-  arr.forEach((item) => {
-    if (item) {
-      result.push(item);
-    }
-  });
-  return result;
+  return arr.filter((item) => item);
 }
 
 /**
@@ -274,13 +256,15 @@ function toArrayOfSquares(arr) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
 function getMovingSum(arr) {
-  const result = [];
-  let operand = 0;
-  for (let i = 0; i < arr.length; i += 1) {
-    result.push(operand + arr[i]);
-    operand += arr[i];
-  }
-  return result;
+  let result;
+  return arr.map((cur, index) => {
+    if (index === 0) {
+      result = cur;
+    } else {
+      result += cur;
+    }
+    return result;
+  });
 }
 
 /**
@@ -295,13 +279,7 @@ function getMovingSum(arr) {
  * [ "a" ] => []
  */
 function getSecondItems(arr) {
-  const result = [];
-  for (let i = 0; i < arr.length; i += 1) {
-    if (i % 2 === 1) {
-      result.push(arr[i]);
-    }
-  }
-  return result;
+  return arr.filter((cur, index) => index % 2 === 1);
 }
 
 
