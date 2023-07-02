@@ -156,8 +156,18 @@ function isTriangle(a, b, c) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) {
+  let result = false;
+  const upRect = rect1.top < rect2.top ? rect1 : rect2;
+  const lowRect = upRect === rect1 ? rect2 : rect1;
+  const leftRect = rect1.left < rect2.left ? rect1 : rect2;
+  const rightRect = leftRect === rect1 ? rect2 : rect1;
+  if (lowRect.top - upRect.top < upRect.height) {
+    if (rightRect.left - leftRect.left < leftRect.width) {
+      result = true;
+    }
+  }
+  return result;
 }
 
 
@@ -449,8 +459,32 @@ function toNaryString(num, n) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  const sortArrPathesByLength = pathes.sort((a, b) => a.length - b.length);
+  let result = sortArrPathesByLength[sortArrPathesByLength.length - 1];
+  sortArrPathesByLength.pop();
+  while (sortArrPathesByLength.length > 0) {
+    const path = sortArrPathesByLength[sortArrPathesByLength.length - 1];
+    let semiResult = '';
+    for (let i = 0; i < path.length; i += 1) {
+      if (path[i] === result[i]) {
+        semiResult += path[i];
+      } else {
+        result = semiResult;
+      }
+    }
+    sortArrPathesByLength.pop();
+  }
+  result = result.split('');
+  while (result[result.length - 1]) {
+    if (result[result.length - 1] === '/') {
+      break;
+    } else {
+      result.pop();
+    }
+  }
+  result = result.join('');
+  return result;
 }
 
 
@@ -507,8 +541,100 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  let result;
+  if (position[0][0] !== undefined
+    && position[0][1] !== undefined && position[0][2] !== undefined) {
+    if (position[0][0] === position[0][1] && position[0][0] === position[0][2]) {
+      if (position[0][0] === 'X') {
+        result = 'X';
+      } else {
+        result = '0';
+      }
+    }
+  }
+
+  if (position[1][0] !== undefined
+    && position[1][1] !== undefined && position[1][2] !== undefined) {
+    if (position[1][0] === position[1][1] && position[1][0] === position[1][2]) {
+      if (position[1][0] === 'X') {
+        result = 'X';
+      } else {
+        result = '0';
+      }
+    }
+  }
+
+  if (position[2][0] !== undefined && position[2][1] !== undefined
+    && position[2][2] !== undefined) {
+    if (position[2][0] === position[2][1] && position[2][0] === position[2][2]) {
+      if (position[2][0] === 'X') {
+        result = 'X';
+      } else {
+        result = '0';
+      }
+    }
+  }
+
+  /* Columns */
+
+  if (position[0][0] !== undefined && position[1][0] !== undefined
+    && position[2][0] !== undefined) {
+    if (position[0][0] === position[1][0] && position[0][0] === position[2][0]) {
+      if (position[0][0] === 'X') {
+        result = 'X';
+      } else {
+        result = '0';
+      }
+    }
+  }
+
+  if (position[0][1] !== undefined && position[1][1] !== undefined
+    && position[2][1] !== undefined) {
+    if (position[0][1] === position[1][1] && position[0][1] === position[2][1]) {
+      if (position[0][1] === 'X') {
+        result = 'X';
+      } else {
+        result = '0';
+      }
+    }
+  }
+
+  if (position[0][2] !== undefined && position[1][2] !== undefined
+    && position[2][2] !== undefined) {
+    if (position[0][2] === position[1][2] && position[0][2] === position[2][2]) {
+      if (position[0][2] === 'X') {
+        result = 'X';
+      } else {
+        result = '0';
+      }
+    }
+  }
+
+  /* Dioganals */
+
+  if (position[0][0] !== undefined && position[1][1] !== undefined
+    && position[2][2] !== undefined) {
+    if (position[0][0] === position[1][1] && position[0][0] === position[2][2]) {
+      if (position[0][0] === 'X') {
+        result = 'X';
+      } else {
+        result = '0';
+      }
+    }
+  }
+
+  if (position[0][2] !== undefined && position[1][1] !== undefined
+    && position[2][0] !== undefined) {
+    if (position[0][2] === position[1][1] && position[0][2] === position[2][0]) {
+      if (position[0][2] === 'X') {
+        result = 'X';
+      } else {
+        result = '0';
+      }
+    }
+  }
+  return result;
 }
 
 

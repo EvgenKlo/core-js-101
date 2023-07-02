@@ -202,8 +202,52 @@ function extractEmails(str) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleString(width, height) {
+  let result = [];
+  result.length = height;
+  result.fill(null);
+  result.forEach((element, index) => {
+    result[index] = [];
+    result[index].length = width;
+    result[index].fill(null);
+  });
+  for (let i = 0; i < result.length; i += 1) {
+    if (i === 0) {
+      for (let j = 0; j < result[i].length; j += 1) {
+        if (j === 0) {
+          result[i][j] = '┌';
+        } else if (j === result[i].length - 1) {
+          result[i][j] = '┐';
+        } else {
+          result[i][j] = '─';
+        }
+      }
+    } else if (i === result.length - 1) {
+      for (let j = 0; j < result[i].length; j += 1) {
+        if (j === 0) {
+          result[i][j] = '└';
+        } else if (j === result[i].length - 1) {
+          result[i][j] = '┘';
+        } else {
+          result[i][j] = '─';
+        }
+      }
+    } else {
+      for (let j = 0; j < result[i].length; j += 1) {
+        if (j === 0) {
+          result[i][j] = '│';
+        } else if (j === result[i].length - 1) {
+          result[i][j] = '│';
+        } else {
+          result[i][j] = ' ';
+        }
+      }
+    }
+  }
+  result = result.map((item) => item.join(''));
+  result = result.join('\n');
+  result += '\n';
+  return result;
 }
 
 
@@ -250,14 +294,16 @@ function encodeToRot13(str) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  /* console.log(value);
+function isString(value) {
   let result = true;
-  if (typeof value !== 'string') {
+  if (typeof value === 'object') {
+    if (value === null || Array.isArray(value)) {
+      result = false;
+    }
+  } else if (typeof value !== 'string') {
     result = false;
   }
-  return result; */
-  throw new Error('Not implemented');
+  return result;
 }
 
 
